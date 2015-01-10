@@ -18,9 +18,9 @@ module.exports = function (User, app) {
     User.settings.ttl = DEFAULT_TTL;
 
 
-    User.validatesUniquenessOf('email', {message: 'Email already exists'});
-    User.validate('email', emailValidator, {message: 'Invalid email'});
-    User.validatesUniquenessOf('username',  {allowNull: true, allowBlank: true, message: 'User already exists'});
+//    User.validatesUniquenessOf('email', {message: 'Email already exists'});
+//    User.validate('email', emailValidator, {message: 'Invalid email'});
+//    User.validatesUniquenessOf('username',  {allowNull: true, allowBlank: true, message: 'User already exists'});
 
 
     User.setter.password = function (plain) {
