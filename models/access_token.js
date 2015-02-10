@@ -12,11 +12,11 @@ module.exports = function (AccessToken) {
      * Anonymous Token
      *
      * ```js
-     * assert(AccessToken.ANONYMOUS.id === '$anonymous');
+     * assert(AccessToken.ANONYMOUS.token === '$anonymous');
      * ```
      */
 
-    AccessToken.ANONYMOUS = new AccessToken({id: '$anonymous'});
+    AccessToken.ANONYMOUS = new AccessToken({token: '$anonymous'});
 
     /**
      * Create a cryptographically random access token id.
@@ -37,11 +37,11 @@ module.exports = function (AccessToken) {
     AccessToken.hook('beforeCreate', function (data, next) {
         data = data || {};
 
-        if (data.id) return next();
+        if (data.token) return next();
 
-        AccessToken.createAccessTokenId(function (err, id) {
+        AccessToken.createAccessTokenId(function (err, token) {
             if (err) return next(err);
-            data.id = id;
+            data.token = token;
             next();
         });
     });
@@ -54,7 +54,7 @@ module.exports = function (AccessToken) {
      */
     AccessToken.findForId = function (id, cb) {
         if (id) {
-            this.findById(id, function (err, token) {
+            AccessToken.findOne({where: {token: id}}, function (err, token) {
                 if (err) return cb(err);
                 if (!token) return cb();
                 token.validate(function (err, isValid) {
