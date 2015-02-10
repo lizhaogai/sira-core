@@ -110,8 +110,9 @@ module.exports = function (User, app) {
                                 //     the value won't be included in the HTTP response
                                 token.__cachedRelations.user = user;
                             }
-                            token.id = token.token;
-                            cb(err, token);
+                            cb(err, {
+                                id: token.token
+                            });
                         });
                     } else {
                         debug('The password is invalid for user %s', query.email || query.username);
