@@ -110,6 +110,7 @@ module.exports = function (User, app) {
                                 //     the value won't be included in the HTTP response
                                 token.__cachedRelations.user = user;
                             }
+                            token.id = token.token;
                             cb(err, token);
                         });
                     } else {
@@ -215,8 +216,7 @@ module.exports = function (User, app) {
                 'See the description of return value for more details.'}
         ],
         returns: {
-            arg: 'accessToken', type: 'object', root: true, description:
-                'The response body contains properties of the AccessToken created on login.\n' +
+            arg: 'accessToken', type: 'object', root: true, description: 'The response body contains properties of the AccessToken created on login.\n' +
                 'Depending on the value of `include` parameter, the body may contain ' +
                 'additional properties:\n\n' +
                 '  - `user` - `{User}` - Data of the currently logged in user. (`include=user`)\n\n'
